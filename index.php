@@ -1,3 +1,32 @@
 <?php get_header(); ?>
-    <div>Content</div>
+    <?php if (have_posts()): ?>
+        <?php while (have_posts()): ?>
+            <?php the_post(); ?>
+
+            <h1>
+                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
+            </h1>
+
+            <div>
+                Posted on
+                <a href="<?php echo get_permalink(); ?>">
+                    <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
+                </a>
+                By 
+                <a href="<?php echo get_author_posts_url( get_the_author_meta('ID') ); ?>">
+                    <?php echo get_the_author(); ?>
+                </a>
+            </div>
+
+            <div>
+                <?php the_excerpt(); ?>
+                <a href="<?php echo get_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+                    Read more <span class="u-screen-reader">about <?php the_title(); ?></span>
+                </a>
+            </div>
+        <?php endwhile; ?>
+
+        <?php the_posts_pagination(); ?>
+        
+    <?php endif; ?>
 <?php get_footer(); ?>

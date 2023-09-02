@@ -12,8 +12,9 @@
             </div>
 
             <div>
-                <?php echo blackridge_readmore_link(); ?>
+                <?php the_excerpt(); ?>
             </div>
+            <?php echo blackridge_readmore_link(); ?>
         <?php endwhile; ?>
 
         <?php the_posts_pagination(); ?>

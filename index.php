@@ -19,5 +19,9 @@
 
         <?php the_posts_pagination(); ?>
 
+        <?php do_action( 'blackridge_after_pagination' ); ?>
+
+    <?php else: ?>
+        <p><?php echo apply_filters( 'blackridge_no_post_text', esc_html__( 'Sorry, no post matched your criteria', 'blackridge' )); ?></p>
     <?php endif; ?>
 <?php get_footer(); ?>

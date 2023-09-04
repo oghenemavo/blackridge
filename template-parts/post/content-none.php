@@ -1,0 +1,1 @@
+<p><?php echo apply_filters( 'blackridge_no_post_text', esc_html__( 'Sorry, no post matched your criteria', 'blackridge' )); ?></p>

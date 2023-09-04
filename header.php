@@ -7,3 +7,15 @@
         
     </head>
     <body <?php body_class(); ?>>
+
+        <header>
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <?php esc_html( bloginfo( 'name' ) ); ?>
+                    </a>
+                    
+                    <?php get_search_form( true ); ?>
+                </div>
+            </nav>
+        </header>

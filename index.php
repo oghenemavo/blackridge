@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-<?php echo is_active_sidebar( 'primary_sidebar' ) ? 8 : 12; ?>">
                 <?php if (have_posts()): ?>
                     <?php while (have_posts()): ?>
                         <?php the_post(); ?>
@@ -30,9 +30,12 @@
                 <?php endif; ?>
             </div>
 
-            <div class="col-md-4">
-                <?php get_sidebar(); ?>
-            </div>
+            <?php if (is_active_sidebar( 'primary_sidebar' )): ?>
+                <div class="col-md-4">
+                    <?php get_sidebar(); ?>
+                </div>
+            <?php endif; ?>
+
         </div>
     </div>
 

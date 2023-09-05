@@ -17,6 +17,7 @@
     function blackridge_post_metabox_html($post)
     {
             $subtitle = get_post_meta( $post->ID, '_blackridge_post_subtitle_meta', true );
+            $layout = get_post_meta( $post->ID, '_blackridge_post_layout_meta', true );
         ?>
         <p>
             <label for="blackridge_post_metabox_html">
@@ -27,6 +28,16 @@
                 id="blackridge_post_metabox_html" class="widefat"
             value="<?php echo esc_attr( $subtitle ); ?>">
         </p>
+        <p>
+            <label for="blackridge_post_layout_field">
+                <?php esc_html_e( 'Post Layout Field', 'blackridge' ); ?>
+            </label>
+            <br>
+            <select class="widefat" name="blackridge_post_layout_field" id="blackridge_post_layout_field">
+                <option <?php selected( $layout, 'full width' ) ?> value="full width"><?php echo esc_html_e( 'Full Width', 'blackridge' ); ?></option>
+                <option <?php selected( $layout, 'sidebar' ) ?> value="sidebar"><?php echo esc_html_e( 'Sidebar', 'blackridge' ); ?></option>
+            </select>
+        </p>
         <?php
     }
 
@@ -35,6 +46,11 @@
         if (array_key_exists('blackridge_post_subtitle_field', $_POST)) 
         {
             update_post_meta( $post_id, '_blackridge_post_subtitle_meta', sanitize_text_field( $_POST['blackridge_post_subtitle_field'] ) );
+        }
+
+        if (array_key_exists('blackridge_post_layout_field', $_POST)) 
+        {
+            update_post_meta( $post_id, '_blackridge_post_layout_meta', sanitize_text_field( $_POST['blackridge_post_layout_field'] ) );
         }
     }
 

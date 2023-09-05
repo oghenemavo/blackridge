@@ -12,6 +12,29 @@
             },
         ));
 
+        /***************** General Settings *******************/
+
+        $wp_customize->add_section('blackridge_general_options', array(
+            'title' => esc_html__( 'General Options', 'blackridge' ),
+            'description' => esc_html__( 'You can change your general options here.', 'blackridge' ),
+        ));
+
+        $wp_customize->add_setting('blackridge_accent_color', array(
+            'default' => '#20ddae',
+            'sanitize_callback' => 'sanitize_hex_color',
+            // 'transport' => 'postMessage'
+        ));
+
+        $wp_customize->add_control(
+            new WP_Customize_Color_Control($wp_customize, 'blackridge_accent_color', 
+            array(
+                'label' => esc_html__( 'Accent Color', 'blackridge' ),
+                'section' => 'blackridge_general_options',
+            )
+        ));
+
+        /***************** Footer Settings  *******************/
+
         $wp_customize->selective_refresh->add_partial('blogname', array(
             'settings' => array('blackridge_footer_bg', 'blackridge_footer_layout'),
             'selector' => '#footer',

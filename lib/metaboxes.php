@@ -18,6 +18,7 @@
     {
             $subtitle = get_post_meta( $post->ID, '_blackridge_post_subtitle_meta', true );
             $layout = get_post_meta( $post->ID, '_blackridge_post_layout_meta', true );
+            wp_nonce_field( 'blackridge_update_post_metabox', 'blackridge_update_post_nonce' );
         ?>
         <p>
             <label for="blackridge_post_metabox_html">
@@ -43,6 +44,16 @@
 
     function blackridge_save_post_metabox($post_id, $post)
     {
+        $edit_cap = get_post_type_object( $post->post_type )->cap->edit_post;
+        if (!current_user_can( $edit_cap, $post_id )) {
+            return;
+        }
+
+        if (!isset($_POST['blackridge_update_post_nonce']) || !wp_verify_nonce( $_POST['blackridge_update_post_nonce'], 'blackridge_update_post_metabox' )) 
+        {
+            return;
+        }
+
         if (array_key_exists('blackridge_post_subtitle_field', $_POST)) 
         {
             update_post_meta( $post_id, '_blackridge_post_subtitle_meta', sanitize_text_field( $_POST['blackridge_post_subtitle_field'] ) );

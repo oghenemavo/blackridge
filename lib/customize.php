@@ -13,7 +13,7 @@
         ));
 
         $wp_customize->selective_refresh->add_partial('blogname', array(
-            'settings' => array('blackridge_footer_bg'),
+            'settings' => array('blackridge_footer_bg', 'blackridge_footer_layout'),
             'selector' => '#footer',
             'container_inclusive' => false,
             'render_callback' => function() {
@@ -55,9 +55,36 @@
             ),
             'section' => 'blackridge_footer_options',
         ));
+
+        
+        $wp_customize->add_setting('blackridge_footer_layout', array(
+            'default' => '3,3,3,3',
+            'transport' => 'postMessage',
+            'sanitize_callback' => 'sanitize_text_field',
+            'validate_callback' => 'blackridge_validate_footer_layout',
+        ));
+
+        $wp_customize->add_control('blackridge_footer_layout', array(
+            'type' => 'text',
+            'label' => esc_html__( 'Footer Layer', 'blackridge' ),
+            'section' => 'blackridge_footer_options',
+        ));
     }
 
     add_action( 'customize_register', 'blackridge_customize_register' );
+
+    function blackridge_validate_footer_layout($validity, $value)
+    {
+        $columns = explode(',', $value);
+        if (!preg_match('/^([1-9]|1[012])(,([1-9]|1[012]))*$/', $value)) 
+        {
+            $validity->add('invalid_footer_layout', esc_html__( 'Footer layout is invalid', 'blackridge' ));
+        } elseif (array_sum($columns) != 12 ) 
+        {
+            $validity->add('invalid_footer_layout', esc_html__( 'some of values should be equal to 12', 'blackridge' ));
+        }
+        return $validity;
+    }
 
     function blackridge_sanitize_footer_bg($input)
     {

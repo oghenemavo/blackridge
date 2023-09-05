@@ -1,7 +1,8 @@
 <?php 
-    $footerLayout = '3,3,3,3';
-    $columns = explode(',', $footerLayout);
-    $isWidgetActive = false;
+    $footer_layout = sanitize_text_field( get_theme_mod( 'blackridge_footer_layout', '3,3,3,3' ) );
+    $footer_layout = preg_replace('/\s+/', '', $footer_layout);
+    $columns = explode(',', $footer_layout);
+    $is_widget_active = false;
     $bg_color = blackridge_sanitize_footer_bg( get_theme_mod( 'blackridge_footer_bg', 'dark' ) ); 
 
     foreach ($columns as $key => $column) 
@@ -9,12 +10,12 @@
         $j = $key+1;
         if (is_active_sidebar('footer-sidebar-' . $j))
         {
-            $isWidgetActive = true;
+            $is_widget_active = true;
         }
     }
 ?>
 
-<?php if ($isWidgetActive): ?>
+<?php if ($is_widget_active): ?>
     <div class="custom-footer my-2 bg-<?php echo $bg_color ?? 'dark'; ?>">
         <div class="container">
             <div class="row">

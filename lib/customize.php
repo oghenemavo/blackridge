@@ -22,7 +22,7 @@
         $wp_customize->add_setting('blackridge_accent_color', array(
             'default' => '#20ddae',
             'sanitize_callback' => 'sanitize_hex_color',
-            // 'transport' => 'postMessage'
+            'transport' => 'postMessage'
         ));
 
         $wp_customize->add_control(

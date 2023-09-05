@@ -2,6 +2,7 @@
     $footerLayout = '3,3,3,3';
     $columns = explode(',', $footerLayout);
     $isWidgetActive = false;
+    $bg_color = blackridge_sanitize_footer_bg( get_theme_mod( 'blackridge_footer_bg', 'dark' ) ); 
 
     foreach ($columns as $key => $column) 
     {
@@ -14,7 +15,7 @@
 ?>
 
 <?php if ($isWidgetActive): ?>
-    <div class="custom-footer">
+    <div class="custom-footer my-2 bg-<?php echo $bg_color ?? 'dark'; ?>">
         <div class="container">
             <div class="row">
 

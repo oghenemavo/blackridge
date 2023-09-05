@@ -13,10 +13,11 @@
         ));
 
         $wp_customize->selective_refresh->add_partial('blogname', array(
-            'settings' => array('blackridge_site_info'),
-            'selector' => '.footer-site-info',
-            'container_inclusive' => true,
+            'settings' => array('blackridge_footer_bg'),
+            'selector' => '#footer',
+            'container_inclusive' => false,
             'render_callback' => function() {
+                get_template_part( 'template-parts/footer/widget' );
                 get_template_part( 'template-parts/footer/info' );
             },
         ));
@@ -38,9 +39,35 @@
             'label' => esc_html__( 'Site Info', 'blackridge' ),
             'section' => 'blackridge_footer_options',
         ));
+
+        $wp_customize->add_setting('blackridge_footer_bg', array(
+            'default' => 'dark',
+            'sanitize_callback' => 'blackridge_sanitize_footer_bg',
+            'transport' => 'postMessage'
+        ));
+
+        $wp_customize->add_control('blackridge_footer_bg', array(
+            'type' => 'select',
+            'label' => esc_html__( 'Footer Background', 'blackridge' ),
+            'choices' => array(
+                'light' => esc_html__( 'Light', 'blackridge' ),
+                'dark' => esc_html__( 'Dark', 'blackridge' ),
+            ),
+            'section' => 'blackridge_footer_options',
+        ));
     }
 
     add_action( 'customize_register', 'blackridge_customize_register' );
+
+    function blackridge_sanitize_footer_bg($input)
+    {
+        $expected = array('light', 'dark');
+        if (in_array($input, $expected, true)) {
+            return $input;
+        }
+
+        return 'dark';
+    }
 
     function blackridge_sanitize_site_info($input)
     {

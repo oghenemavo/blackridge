@@ -22,3 +22,15 @@
             return $output;
         }
     }
+
+    if (!function_exists('blackridge_meta')) 
+    {
+        function blackridge_meta($id, $key, $default)
+        {
+            $output = get_post_meta( $id, $key, true );
+            if (!$output && $default) {
+                return $default;
+            }
+            return $output;
+        }
+    }

@@ -12,6 +12,36 @@
             },
         ));
 
+        /***************** Single Option Settings *******************/
+        $wp_customize->add_section('blackridge_single_blog_options', array(
+            'title' => esc_html__( 'Single Blog Options', 'blackridge' ),
+            'description' => esc_html__( 'You can change your single blog options here.', 'blackridge' ),
+            'active_callback' => 'blackridge_show_single_blog_section'
+        ));
+
+        $wp_customize->add_setting('blackridge_display_author_info', array(
+            'default' => true,
+            'sanitize_callback' => 'blackridge_santize_checkbox',
+            'transport' => 'postMessage',
+        ));
+
+        $wp_customize->add_control('blackridge_display_author_info', array(
+            'type' => 'checkbox',
+            'label' => esc_html__( 'Show Author Info', 'blackridge' ),
+            'section' => 'blackridge_single_blog_options',
+        ));
+
+        function blackridge_show_single_blog_section()
+        {
+            global $post;
+            return is_single() && $post->post_type === 'post';
+        }
+
+        function blackridge_santize_checkbox($checked)
+        {
+            return (isset($checked) && $checked === true) ? true : false;
+        }
+
         /***************** General Settings *******************/
 
         $wp_customize->add_section('blackridge_general_options', array(

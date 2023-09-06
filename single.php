@@ -27,6 +27,8 @@
                             }
                         ?>
 
+                        <?php get_template_part( 'template-parts/single/navigation' ); ?>
+
                     <?php endwhile; ?>
                     
 

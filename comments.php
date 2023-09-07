@@ -13,12 +13,8 @@
         <h2>
             <?php
                 printf(
-                    esc_html( _n( '%1$s Reply to "%2$2"', 
-                        '%1$s Replies to "%2$2"', 
-                        get_comments_number(), 
-                        'blackridge' 
-                    ) ),
-                    number_format_i18n( get_comments_number() ),
+                    esc_html( _n( '%1$s Reply to "%2$s"', '%1$s Replies to "%2$s"', get_comments_number(), 'blackridge' ) ), 
+                    number_format_i18n(get_comments_number()),
                     get_the_title()
                 );
             ?>
@@ -28,7 +24,8 @@
             <?php 
                 wp_list_comments( array(
                     'avatar_size' => 200,
-                    'reply_text' => 'hello',
+                    'reply_text'  => 'hello',
+                    'callback'    => 'blackridge_comment_callback'
                 ) )
             ?>
         </ul>

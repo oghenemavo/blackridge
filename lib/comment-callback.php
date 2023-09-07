@@ -4,7 +4,7 @@
     {
         ?>
         <li id="comment-<?php comment_ID(); ?>" <?php comment_class(array('class1', $comment->comment_parent ? 'class-child': '')) ?>>
-            <article class="">
+            <article id="div-comment-<?php comment_ID(); ?>" class="">
                 <?php echo get_avatar($comment, 100, false, false, array('class' => 'avatar-classx') ); ?>
                 <?php edit_comment_link( esc_html__('Edit Comment', 'blackridge'), '<span class="class-editlink">', '</span>' ); ?>
                 
@@ -25,6 +25,19 @@
                             ?>
                         </time>
                     </a>
+
+                    <?php if ($comment->comment_approved == '0'): ?>
+                        <p><?php esc_html_e('Your comment is a waiting moderation', 'blackridge'); ?></p>
+                    <?php endif; ?>
+
+                    <?php comment_text(); ?>
+                    <?php 
+                        comment_reply_link(array(
+                            'depth' => $depth,
+                            'max_depth' => $args['max_depth'],
+                            'add_below' => 'div-comment'
+                        ));
+                    ?>
                 </div><!-- content ends -->
             </article>
         </li>

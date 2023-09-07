@@ -23,7 +23,8 @@
         <ul>
             <?php 
                 wp_list_comments( array(
-                    'avatar_size' => 200,
+                    'short_ping' => true,
+                    'avatar_size' => 50,
                     'reply_text'  => 'hello',
                     'callback'    => 'blackridge_comment_callback'
                 ) )

@@ -6,7 +6,7 @@
 <div class="card my-3">
     <?php if (get_the_post_thumbnail() != '' && (empty($audios) || is_single())): ?>
         <div>
-            <?php the_post_thumbnail( 'large', array('class' => 'img-responsive responsive--full card-img-top', 'title' => 'Feature image') ); ?>
+            <?php the_post_thumbnail( 'blackridge-blog-image', array('class' => 'img-responsive responsive--full card-img-top', 'title' => 'Feature image') ); ?>
         </div>
     <?php endif; ?>
 

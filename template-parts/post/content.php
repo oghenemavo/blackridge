@@ -2,7 +2,7 @@
     <?php 
         if (get_the_post_thumbnail() != '') 
         {
-            the_post_thumbnail( 'large', array('class' => 'img-responsive responsive--full card-img-top', 'title' => 'Feature image') );
+            the_post_thumbnail( 'blackridge-blog-image', array('class' => 'img-responsive responsive--full card-img-top', 'title' => 'Feature image') );
         }
     ?>
     <div class="card-body">

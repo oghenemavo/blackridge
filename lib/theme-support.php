@@ -21,6 +21,9 @@
             'gallery',
             'audio',
         ));
+
+        // add custom image size
+        add_image_size('blackridge-blog-image', 1200, 0);
     }
 
     add_action( 'after_setup_theme', 'blackridge_theme_support' );

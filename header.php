@@ -48,3 +48,12 @@
                 </div>
             </nav>
         </header>
+
+        <?php
+
+        //wp_get_attachment_image_url(1904, 'blackridge-blog-image');
+        //wp_get_attachment_image(1904, 'blackridge-blog-image');
+        // wp_get_attachment_image_src(1904, 'large');
+        //wp_get_attachment_image_url(1904, 'large');
+        // wp_get_attachment_url(1904, 'large');
+        //wp_get_attachment_url(1904, 'large');

@@ -6,16 +6,8 @@
         }
     ?>
     <div class="card-body">
-        <?php if (is_single()): ?>
-            <h1 class="card-title">
-                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-            </h1>
-        <?php else: ?>
-            <h5 class="card-title">
-                <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
-            </h5>
-        <?php endif; ?>
-        <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo blackridge_post_short_meta(); ?></h6>
+        
+        <?php get_template_part('template-parts/post/header'); ?>
 
         <?php if (is_single()): ?>
             <?php the_content(); ?>
@@ -24,23 +16,7 @@
         <?php endif; ?>
 
         <?php if (is_single()): ?>
-            <footer>
-                <?php 
-                    if (has_category()) {
-                        echo '<div>';
-                        $cat_list = get_the_category_list( esc_html__(', ', 'blackridge') );
-                        printf(esc_html__('Posted in %s', 'blackridge'), $cat_list);
-                        echo '</div>';
-                    }
-
-                    if (has_tag()) {
-                        echo '<div>';
-                        $tags_list = get_the_tag_list( '<ul><li>', '</li><li>', '</li></ul>' );
-                        echo $tags_list;
-                        echo '</div>';
-                    }
-                ?>
-            </footer>
+            <?php get_template_part('template-parts/post/footer'); ?>
         <?php endif; ?>
         
         <?php 

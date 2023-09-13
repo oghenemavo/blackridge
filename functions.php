@@ -8,6 +8,7 @@
     require_once 'lib/customize.php';
     require_once 'lib/metaboxes.php';
     require_once 'lib/comment-callback.php';
+    require_once 'lib/most-recent-widget.php';
 
 
     function blackridge_button($atts)

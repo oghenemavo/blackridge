@@ -80,7 +80,38 @@
 
         public function widget($args, $instance)
         {
-            
+            // var_dump($instance['include_date']);
+
+            echo $args['before_widget'];
+                if (isset($instance['title']) && !empty($instance['title'])) 
+                {
+                    $title = apply_filters('widget_title', $instance['title']);
+                    echo $args['before_title'] . esc_html($title) .  $args['after_title'] ;
+                }
+
+                $most_recent_query = new WP_Query(
+                    array(
+                        'ignore_sticky_posts' => true,
+                        'post_type' => 'post',
+                        'posts_per_page' => isset($instance['posts_count']) ? intval($instance['posts_count']) : 3,
+                        'orderby' => isset($instance['sort_by']) ? blackridge_sanitize_sort_by($instance['sort_by']) : 'date',
+                    )
+                );
+
+                if ($most_recent_query->have_posts()) 
+                {
+                    echo '<div>';
+                    while ($most_recent_query->have_posts()) 
+                    {
+                        $most_recent_query->the_post();
+                        echo '<div style="color:#fff;">';
+                        echo '<h6><a href="'. esc_url(get_permalink()) . '">' . get_the_title() . '</a></h6>';
+                        echo isset($instance['include_date']) && $instance['include_date'] ? get_the_date() : '';
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                }
+            echo $args['after_widget'];
         }
 
         public function update($new_instance, $old_instance)

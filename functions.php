@@ -80,4 +80,4 @@
         return $sizes;
     }
     
-    add_action('wp_calculate_image_sizes', 'blackridge_image_sizes');
+    add_action('wp_calculate_image_sizes', 'blackridge_image_sizes', 10, 5);
